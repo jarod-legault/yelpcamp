@@ -31,7 +31,7 @@ router.get("/", function(req, res){
 // CREATE - Add new campground to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
     var name = req.body.name;
-    var price = req.body.price;
+    var price = convertToString(req.body.price);
     var image = req.body.image;
     var desc = req.body.description;
     var author = {
@@ -79,7 +79,12 @@ router.get("/:id", function(req, res){
 // EDIT - show edit form
 router.get("/:id/edit", middleware.checkCampgroundOwnership, function(req, res){
     Campground.findById(req.params.id, function(err, foundCampground){
-        res.render("campgrounds/edit", {campground: foundCampground});
+        if(err){
+            req.flash("error", err.message);
+            res.redirect("/campgrounds");
+        } else {
+            res.render("campgrounds/edit", {campground: foundCampground});
+        }
     });
 });
 
@@ -93,7 +98,8 @@ router.put("/:id", middleware.checkCampgroundOwnership, function(req, res){
             var lat = data[0].latitude;
             var lng = data[0].longitude;
             var location = data[0].formattedAddress;
-            var newData = {name: req.body.campground.name, image: req.body.campground.image, description: req.body.campground.description, price: req.body.campground.price, location: location, lat: lat, lng: lng};
+            var price = convertToString(req.body.campground.price);
+            var newData = {name: req.body.campground.name, image: req.body.campground.image, description: req.body.campground.description, price: price, location: location, lat: lat, lng: lng};
             Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, updatedCampground){
                 if(err){
                     req.flash("error", err.mesage);
@@ -120,5 +126,17 @@ router.delete("/:id", middleware.checkCampgroundOwnership, function(req, res){
         }
     });
 });
+
+// Convert numerical currency to string currency
+function convertToString(priceAsNumber) {
+    var centsAsString = Math.round((priceAsNumber * 100)).toString(); // Convert to cents string
+    var priceAsString = centsAsString.substr(0, centsAsString.length-2) + "." + centsAsString.substr(centsAsString.length-2); // Add "."
+    var commaPosition = 6;
+    for(var i = priceAsNumber; i >= 1000; i = i/1000) {
+        priceAsString = priceAsString.substr(0, priceAsString.length - commaPosition) + "," + priceAsString.substr(priceAsString.length - commaPosition);
+        commaPosition += 4; // Move 3 digits plus comma
+    }
+    return priceAsString;
+}
 
 module.exports = router;
