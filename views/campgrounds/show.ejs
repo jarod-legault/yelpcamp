@@ -34,14 +34,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <strong><%= comment.author.username %></strong>
-                        <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
+                        <span class="pull-right"><strong>Submitted <%= moment(comment.createdAt).fromNow() %></strong></span>
                         <p><%= comment.text %></p>
                         <% if(currentUser && (comment.author.id.equals(currentUser._id) || currentUser.isAdmin)){ %>
                             <a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
                             <form class="delete-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
-                                <input type="submit" class="btn btn-xs btn-danger" value="Delete"></input>
+                                <input type="submit" class="btn btn-xs btn-danger pull-right" value="Delete"></input>
                             </form>
                         <% } %>
+                        <hr>
                     </div>
                 </div>
             <% }) %>
