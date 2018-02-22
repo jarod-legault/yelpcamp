@@ -28,3 +28,16 @@
     height: 400px;
     width: 100%;
 }
+
+.fa-users {
+    font-size: 2em;
+}
+
+.fa-user {
+    font-size: 5em;
+    padding: 8px;
+}
+
+.user-thumbnail {
+    padding: 30px;
+}

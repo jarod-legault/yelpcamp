@@ -6,6 +6,7 @@
         <title>YelpCamp</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
         <link rel="stylesheet" href="/stylesheets/main.css"></link>
+        <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -28,6 +29,9 @@
                             <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a href="/login">Login</a></li>
                             <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a href="/register">Sign Up</a></li>
                         <% } else { %>
+                            <% if(currentUser.isAdmin){ %>
+                                <li><a class="fas fa-users" href="/users"></a></li>
+                            <% } %>    
                             <li><a href="#">Signed in as <%= currentUser.username %></a></li>
                             <li><a href="/logout">Logout</a></li>
                         <% } %>

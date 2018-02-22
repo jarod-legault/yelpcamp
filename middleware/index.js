@@ -10,7 +10,7 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next){
                 req.flash("error", "Campground not found.");
                 res.redirect("back");
             } else {
-                if(foundCampground.author.id.equals(req.user._id)){
+                if(foundCampground.author.id.equals(req.user._id) || req.user.isAdmin){
                     next();
                 } else {
                     req.flash("error", "You don't have permission to do that.");
@@ -31,7 +31,7 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
                 req.flash("error", "Comment not found");
                 res.redirect("back");
             } else {
-                if(foundComment.author.id.equals(req.user._id)){
+                if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin){
                     next();
                 } else {
                     req.flash("error", "You don't have permission to do that.");
@@ -52,6 +52,14 @@ middlewareObj.isLoggedIn = function(req, res, next){
     }
     req.flash("error", "You need to be logged in to do that.");
     res.redirect("/login");
+}
+
+middlewareObj.isAdmin = function(req, res, next){
+    if(req.isAuthenticated() && req.user.isAdmin){
+        return next();
+    }
+    req.flash("error", "You need to be an administrator to do that.");
+    res.redirect("/campgrounds");
 }
 
 module.exports = middlewareObj;

@@ -1,0 +1,26 @@
+<% include ./partials/header %>
+
+<div class="row text-center" style="display: flex; flex-wrap: wrap;">
+    <% users.forEach(function(user){ %>
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail user-thumbnail">
+                <div class="fas fa-user"></div>
+                <div class="caption"><h4><%= user.username %></h4></div>
+                <% if(user.isAdmin) { %>
+                    <form class="pull-left" action="/users/<%= user._id %>/makeNormal?_method=PUT" method="POST">
+                    <input type="submit" class="btn btn-xs btn-info" value="Make Normal"></input>    
+                    </form>
+                <% } else { %>    
+                    <form class="pull-left" action="/users/<%= user._id %>/makeAdmin?_method=PUT" method="POST">
+                        <input type="submit" class="btn btn-xs btn-warning" value="Make Admin"></input>
+                    </form>
+                <% } %>
+                <form class="delete-form pull-right" action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                    <input type="submit" class="btn btn-xs btn-danger" value="Delete"></input>
+                </form>
+            </div>
+        </div>
+    <% }); %>
+</div>
+
+<% include ./partials/footer %>
