@@ -1,6 +1,7 @@
 var express     = require("express"),
     router      = express.Router(),
     Campground  = require("../models/campground"),
+    User  = require("../models/user"),
     middleware  = require("../middleware"),
     /*geocoder    = require("geocoder"),*/
     NodeGeocoder    = require("node-geocoder");
@@ -71,7 +72,15 @@ router.get("/:id", function(req, res){
             req.flash("error", "Campground not found.");
             res.redirect("back");
         } else {
-            res.render("campgrounds/show", {campground: foundCampground});
+            User.findById(foundCampground.author.id, function(err, foundUser){
+                var isCurrentUser;
+                if(foundUser) {
+                    isCurrentUser = true;
+                } else {
+                    isCurrentUser = false;
+                }
+                res.render("campgrounds/show", {campground: foundCampground, isCurrentUser: isCurrentUser});
+            });
         }
     });
 });

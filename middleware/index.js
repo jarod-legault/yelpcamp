@@ -62,4 +62,12 @@ middlewareObj.isAdmin = function(req, res, next){
     res.redirect("/campgrounds");
 }
 
+middlewareObj.isAdminOrSameUser = function(req, res, next){
+    if(req.isAuthenticated() && (req.user.isAdmin || (req.user._id.equals(req.params.id)))){
+        return next();
+    }
+    req.flash("error", "You do not have permission to do that.");
+    res.redirect("back");
+}
+
 module.exports = middlewareObj;

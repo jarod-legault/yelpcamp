@@ -1,3 +1,5 @@
+<!--CAMPGROUND SHOW PAGE-->
+
 <% include ../partials/header %>
 <div class="row">
     <div class="col-md-3">
@@ -16,7 +18,15 @@
                 <h4 class="pull-right">$<%= campground.price %>/night</h4>
                 <h4><a><%= campground.name %></a></h4>
                 <p><%= campground.description %></p>
-                <p><em>Submitted by <%= campground.author.username %>, <%= moment(campground.createdAt).fromNow() %></em></p>
+                <p><em>Submitted by 
+                    <% if(isCurrentUser) { %>
+                        <a href="/users/<%= campground.author.id %>">
+                    <% } %>
+                            <%= campground.author.username %>
+                    <% if(isCurrentUser) { %>
+                        </a>
+                    <% } %>
+                    , <%= moment(campground.createdAt).fromNow() %></em></p>
                 <% if(currentUser && (campground.author.id.equals(currentUser._id) || currentUser.isAdmin)){ %>
                     <a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
                     <form class="delete-form" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Do you really want to delete <%= campground.name %>?');">

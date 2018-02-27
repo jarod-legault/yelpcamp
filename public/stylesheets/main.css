@@ -41,3 +41,11 @@
 .user-thumbnail {
     padding: 30px;
 }
+
+.btn-user {
+    margin: 5px;
+}
+
+.list-header {
+    text-decoration: underline;
+}

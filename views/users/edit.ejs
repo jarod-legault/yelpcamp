@@ -1,0 +1,31 @@
+<!--USER EDIT PAGE-->
+
+
+<% include ../partials/header %>
+
+<div class="row">
+    <h1 class="login-header">Edit profile of <%= user.username %></h1>
+    <div class="login-form">
+        <form action="/users/<%= user._id %>?_method=PUT" method="POST">
+<!--            <label for="username">Username*</label>
+            <div class="form-group"><input class="form-control" type="text" name="username" value="<%= user.username %>" autofocus required></input></div>
+           <label for="password">Password*</label>
+            <div class="form-group"><input class="form-control" type="password" name="password" id="password" placeholder="password" required></input></div>
+            <label for="passwordConfirm">Confirm password*</label>
+            <div class="form-group"><input class="form-control" type="password" name="passwordConfirm" id="passwordConfirm" placeholder="confirm password" required></input></div>
+-->            <label for="firstName">First Name</label>
+            <div class="form-group"><input class="form-control" type="text" name="firstName" value="<%= user.firstName %>"></input></div>
+            <label for="lastName">Last Name</label>
+            <div class="form-group"><input class="form-control" type="text" name="lastName" value="<%= user.lastName %>"></input></div>
+            <label for="email">email*</label>
+            <div class="form-group"><input class="form-control" type="email" name="email" value="<%= user.email %>"" required></input></div>
+            <label for="avatar">Avatar URL</label>
+            <div class="form-group"><input class="form-control" type="text" name="avatar" value="<%= user.avatar %>"></input></div>
+            <p>*Required fields</p>
+            <button class="btn btn-lg btn-primary btn-block">Update</button>
+        </form>
+        <a href="/campgrounds">Go Back</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>

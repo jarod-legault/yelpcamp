@@ -4,12 +4,21 @@
     <h1 class="login-header">Sign Up!</h1>
     <div class="login-form">
         <form action="/register" method="POST">
-            <label for="username">Username</label>
-            <div class="form-group"><input class="form-control" type="text" name="username" placeholder="username" autofocus></input></div>
-            <label for="password">Password</label>
+            <label for="username">Username*</label>
+            <div class="form-group"><input class="form-control" type="text" name="username" placeholder="john_doe23" autofocus required></input></div>
+            <label for="password">Password*</label>
             <div class="form-group"><input class="form-control" type="password" name="password" id="password" placeholder="password" required></input></div>
-            <label for="passwordConfirm">Confirm password</label>
+            <label for="passwordConfirm">Confirm password*</label>
             <div class="form-group"><input class="form-control" type="password" name="passwordConfirm" id="passwordConfirm" placeholder="confirm password" required></input></div>
+            <label for="firstName">First Name</label>
+            <div class="form-group"><input class="form-control" type="text" name="firstName" placeholder="John"></input></div>
+            <label for="lastName">Last Name</label>
+            <div class="form-group"><input class="form-control" type="text" name="lastName" placeholder="Doe"></input></div>
+            <label for="email">email*</label>
+            <div class="form-group"><input class="form-control" type="email" name="email" placeholder="john@doe.com" required></input></div>
+            <label for="avatar">Avatar URL</label>
+            <div class="form-group"><input class="form-control" type="text" name="avatar" placeholder="http://www.images.com/myAvatar.jpg"></input></div>
+            <p>*Required fields</p>
             <button class="btn btn-lg btn-primary btn-block">Sign Up</button>
         </form>
         <a href="/campgrounds">Go Back</a>
