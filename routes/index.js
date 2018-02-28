@@ -133,11 +133,9 @@ router.get("/reset/:token", function(req, res){
         if(err) {
             console.log(err.message);
         } else if(!foundUser) {
-            console.log("invalid token");
             req.flash("error", "Password reset token is invalid or has expired 136.");
             res.redirect("/forgot");
         } else {
-            console.log("render reset page")
             res.render("reset", {token: req.params.token});
         }
     });

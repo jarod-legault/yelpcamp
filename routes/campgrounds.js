@@ -20,13 +20,24 @@ var geocoder = NodeGeocoder(options);
 
 // INDEX - Show all campgrounds
 router.get("/", function(req, res){
-    Campground.find({}, function(err, allCampgrounds){
-        if(err){
-            console.log(err);
-        } else {
-            res.render("campgrounds/index", {campgrounds: allCampgrounds, page: 'campgrounds'});
-        }
-    });
+    if(req.query.search){
+        const regex = new RegExp(escapeRegex(req.query.search), "gi");
+        Campground.find({name: regex}, function(err, foundCampgrounds){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("campgrounds/index", {campgrounds: foundCampgrounds, page: 'campgrounds'});
+            }
+        });
+    } else {
+        Campground.find({}, function(err, allCampgrounds){
+            if(err){
+                console.log(err);
+            } else {
+                res.render("campgrounds/index", {campgrounds: allCampgrounds, page: 'campgrounds'});
+            }
+        });
+    }
 });
 
 // CREATE - Add new campground to DB
@@ -146,6 +157,10 @@ function convertToString(priceAsNumber) {
         commaPosition += 4; // Move 3 digits plus comma
     }
     return priceAsString;
+}
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
 module.exports = router;
