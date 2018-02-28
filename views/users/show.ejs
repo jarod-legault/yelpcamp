@@ -10,6 +10,10 @@
             <div class="caption"><a href="<%= user.email %>"><%= user.email %></a></div>
             <div>
                 <% if(currentUser && (user._id.equals(currentUser._id) || currentUser.isAdmin)){ %>
+                    <% if(currentUser && currentUser.isAdmin){ %>
+                        <p>Reset Password Token: <%= user.resetPasswordToken %></p>
+                        <p>Reset Password Expires: <%= user.resetPasswordExpires %></p>
+                    <% } %>
                     <a class="btn btn-user btn-xs btn-warning" href="/users/<%= user._id %>/edit">Edit</a>
                     <form class="delete-form pull-right" action="/users/<%= user._id %>?_method=DELETE" method="POST">
                         <input type="submit" class="btn btn-user btn-xs btn-danger" value="Delete"></input>
