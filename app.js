@@ -11,6 +11,9 @@ var bodyParser      = require("body-parser"),
     seedDB          = require("./seeds"),
     app             = express();
     
+// Configure dotenv
+require('dotenv').config();
+    
 // Requiring routes
 var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),

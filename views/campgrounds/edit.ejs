@@ -3,7 +3,7 @@
 <div class="row">
     <h1 style="text-align: center">Edit <%= campground.name %></h1>
     <div style="width: 30%; margin: 25px auto">
-        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
+        <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Campgound Name</label>
                 <input class="form-control" type="text" name="campground[name]" value="<%= campground.name %>" autofocus></input>
@@ -17,8 +17,14 @@
                 <input class="form-control" type="text" name="location" id="location" value="<%= campground.location %>"></input>
             </div>
             <div class="form-group">
-                <label for="image">Image URL</label>
-                <input class="form-control" type="text" name="campground[image]" value="<%= campground.image %>"></input>
+                <label for="image">Current Image</label>
+                <div class="thumbnail">
+                    <img src="<%= campground.image %>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image">Select New Image</label>
+                <input type="file" id="image" name="image" accept="image/*" required></input>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
