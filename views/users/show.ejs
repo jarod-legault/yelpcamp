@@ -5,20 +5,22 @@
 <div class="row">
     <div class="col-md-4">
         <h1><%= user.firstName + " " + user.lastName %></h1>
-        <div class="thumbnail">
-            <img src="<%= user.avatar %>" alt="User profile image"></img>
-            <div class="caption"><a href="<%= user.email %>"><%= user.email %></a></div>
-            <div>
-                <% if(currentUser && (user._id.equals(currentUser._id) || currentUser.isAdmin)){ %>
-                    <% if(currentUser && currentUser.isAdmin){ %>
-                        <p>Reset Password Token: <%= user.resetPasswordToken %></p>
-                        <p>Reset Password Expires: <%= user.resetPasswordExpires %></p>
+        <div class="card">
+        <img class="card-img-top" src="<%= user.avatar %>" alt="User profile image"></img>
+            <div class="card-body">
+                <div class="caption"><a href="<%= user.email %>"><%= user.email %></a></div>
+                <div>
+                    <% if(currentUser && (user._id.equals(currentUser._id) || currentUser.isAdmin)){ %>
+                        <% if(currentUser && currentUser.isAdmin){ %>
+                            <p>Reset Password Token: <%= user.resetPasswordToken %></p>
+                            <p>Reset Password Expires: <%= user.resetPasswordExpires %></p>
+                        <% } %>
+                        <a class="btn btn-user btn-sm btn-warning" href="/users/<%= user._id %>/edit">Edit</a>
+                        <form class="delete-form float-right" action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                            <input type="submit" class="btn btn-user btn-sm btn-danger" value="Delete"></input>
+                        </form>
                     <% } %>
-                    <a class="btn btn-user btn-xs btn-warning" href="/users/<%= user._id %>/edit">Edit</a>
-                    <form class="delete-form pull-right" action="/users/<%= user._id %>?_method=DELETE" method="POST">
-                        <input type="submit" class="btn btn-user btn-xs btn-danger" value="Delete"></input>
-                    </form>
-                <% } %>
+                </div>
             </div>
         </div>
     </div>

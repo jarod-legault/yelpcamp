@@ -151,7 +151,6 @@ router.put("/:id", middleware.checkCampgroundOwnership, upload.single("image"), 
             var location = data[0].formattedAddress;
             var price = convertToString(req.body.campground.price);
             if(req.file){ // If a new file was selected
-                console.log(req);
                 cloudinary.uploader.upload(req.file.path, function(result) {
                     // Add cloudinary url for the image to the campground object under image property
                     req.body.image = result.secure_url;
@@ -180,7 +179,6 @@ router.put("/:id", middleware.checkCampgroundOwnership, upload.single("image"), 
             }    
         }
     });
-    
 });
 
 // DESTROY CAMPGROUND ROUTE

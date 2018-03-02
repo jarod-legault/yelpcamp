@@ -4,7 +4,9 @@
 <% include ../partials/header %>
 
 <div class="row">
-    <h1 class="login-header">Edit profile of <%= user.username %></h1>
+    <div class="col-md-12 text-center">
+        <h1 class="login-header">Edit profile of <%= user.username %></h1>
+    </div>
     <div class="login-form">
         <form action="/users/<%= user._id %>?_method=PUT" method="POST">
             <label for="firstName">First Name</label>
