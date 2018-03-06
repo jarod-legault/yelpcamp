@@ -8,7 +8,7 @@ var express     = require("express"),
     middleware  = require("../middleware");
     
 // Mailgun setup
-var api_key = 'key-1b2e2d75668891f8f4e08e70dfdabafc';
+var api_key = process.env.MAILGUN_API_KEY;
 var domain = 'sandboxcf2abc5f7d344a4fbc55afd6a753be0a.mailgun.org';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 

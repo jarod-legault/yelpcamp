@@ -17,7 +17,8 @@ require('dotenv').config();
 // Requiring routes
 var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
-    indexRoutes         = require("./routes/index");
+    indexRoutes         = require("./routes/index"),
+    contactRoutes       = require("./routes/contact");
 
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 mongoose.connect(url);
@@ -54,6 +55,7 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/contact", contactRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Yelp Camp server is running!"); 
