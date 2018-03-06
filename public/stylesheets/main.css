@@ -33,11 +33,6 @@
     font-size: 2em;
 }
 
-.fa-user {
-    font-size: 5em;
-    padding: 8px;
-}
-
 .user-thumbnail {
     padding: 30px;
 }
@@ -48,4 +43,21 @@
 
 .list-header {
     text-decoration: underline;
+}
+
+.new-comment-box {
+    border-left: 5px solid #00C851;
+}
+
+.edit-comment-box {
+    border-left: 5px solid #ffbb33;
+    margin-top: 15px;
+}
+
+.subtle {
+    color: grey;
+}
+
+.active-user {
+    color: orange;
 }
