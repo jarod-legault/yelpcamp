@@ -164,7 +164,9 @@
         });
     }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXJ76W6_WRPIvcGhC89P6782-dmJalOPk&callback=initMap"></script>
+<!-- <script async defer src=`https://maps.googleapis.com/maps/api/js?key=AIzaSyDXJ76W6_WRPIvcGhC89P6782-dmJalOPk&callback=initMap`></script> -->
+<% var googleUrl = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&callback=initMap`; %>
+<script async defer src=<%= googleUrl %>></script>
 
 
 <% include ../partials/footer %>
