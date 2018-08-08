@@ -9,8 +9,11 @@ var bodyParser      = require("body-parser"),
     methodOverride  = require("method-override"),
     express         = require("express"),
     seedDB          = require("./seeds"),
-    app             = express();
+    app             = express(),
+    favicon         = require('serve-favicon'),
+    path            = require('path');
     
+
 // Configure dotenv
 require('dotenv').config();
     
@@ -22,16 +25,14 @@ var commentRoutes       = require("./routes/comments"),
 
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
 mongoose.connect(url);
-//mongoose.connect("mongodb://localhost/yelp_camp"); // Dev
-//mongoose.connect("mongodb://jarodl:yelpcamp@ds025419.mlab.com:25419/yelpcamp"); // Prod
 
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 app.locals.moment = require("moment");
-//seedDB(); //seed the database
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
